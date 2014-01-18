@@ -48,9 +48,13 @@ class Yiippod extends CWidget
     /** The js scripts to register  -\- Путь до скрипта uppod'a
      * @var array
      */
-    private $js = array(
+    public $js = array(
         'uppod.js'
     );
+    /** The styles file to register  -\- Путь до файла стилей uppod'a
+     * @var array
+     */
+    public $st;
 
     /** The asset folder after published  -\- Папка со скриптами после публикации
      * @var string
@@ -72,8 +76,9 @@ class Yiippod extends CWidget
     {
         $url = $this->publishAssets();
 
-        Yii::app()->clientScript->registerScriptFile($url.'/swfobject.js');
-		Yii::app()->clientScript->registerScriptFile($url.'/uppod.js');
+        Yii::app()->clientScript
+            ->registerScriptFile($this->assets.'/swfobject.js')
+            ->registerScriptFile($this->assets.'/uppod.js');
 
     }
     /** 
@@ -97,10 +102,6 @@ class Yiippod extends CWidget
      */
     public function run()
     {
-       
-        	$this->render('yiippod');
-
+        $this->render('yiippod');
     }
- 
-   
 }
