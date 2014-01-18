@@ -95,6 +95,9 @@ class Yiippod extends CWidget
 		if(!isset($this->bgcolor) or empty($this->bgcolor)) $this->bgcolor = '#FFF';
 		if(!isset($this->id) or empty($this->id)) $this->id = 'uppodplayer';
         if(!isset($this->swfUrl)) $this->swfUrl = $this->assets."/uppod.swf";
+
+        $this->height=$this->height ? (int)$this->height : 480;
+        $this->width=$this->width ? (int)$this->width : 640;
     }
     /** 
      * Render uppod player -\- Отображение плеера
@@ -102,6 +105,7 @@ class Yiippod extends CWidget
      */
     public function run()
     {
-        $this->render('yiippod');
+        $bgcolor=empty($this->bgcolor) ? '#000' : $this->bgcolor;
+        $this->render('yiippod', compact('bgcolor'));
     }
 }
