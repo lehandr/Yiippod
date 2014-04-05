@@ -1,5 +1,5 @@
 <object data="<?=$this->swfUrl?>" type="application/x-shockwave-flash" height="<?=$this->height?>" width="<?=$this->width?>">
-    <param value="<?=$bgcolor?>" name="bgcolor">
+    <param value="<?=$this->bgcolor?>" name="bgcolor">
     <param value="true" name="allowFullScreen">
     <param value="always" name="allowScriptAccess">
     <param value="<?=$this->id?>" name="id">
@@ -16,8 +16,8 @@
             if (new ActiveXObject("ShockwaveFlash.ShockwaveFlash")) {
                 flashInstalled = true;
             }
-        } catch(e) {};
-    };
+        } catch(e) {}
+    }
 
    if(ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1 || (ua.indexOf("android") != -1 && !flashInstalled)){
         // HTML5
@@ -29,7 +29,7 @@
       } else {
          // FLASH
          var flashvars = {"file":"<?=$this->video?>"<?=($this->st ? ', "st": "'.$this->st.'"' : '')?>};
-         var params = {bgcolor:"<?=$bgcolor?>",  allowFullScreen:"true", allowScriptAccess:"always",id:"<?=$this->id?>"};
+         var params = {bgcolor:"<?=$this->bgcolor?>",  allowFullScreen:"true", allowScriptAccess:"always",id:"<?=$this->id?>"};
          new swfobject.embedSWF("<?=Yii::app()->request->baseUrl.$this->swfUrl?>", "<?=$this->id?>", "<?=$this->width?>", "<?=$this->height?>", "10.0.0", false, flashvars, params);
       }
    }

@@ -32,19 +32,19 @@ class Yiippod extends CWidget
     /** Player width -\- Ширина плеера
      * @var integer
      */
-    public $width;
+    public $width=640;
     /** Player height. -\- Высота плеера
      * @var integer
      */
-    public $height;
+    public $height=480;
 	 /** Player background color -\- Цвет заднего фона плеера
      * @var string
      */
-	public $bgcolor;
+	public $bgcolor='#000';
 	 /** Player id. -\- Идентификатор ИД плеера
      * @var string
      */
-	public $id;
+	public $id='uppodplayer';
     /** The js scripts to register  -\- Путь до скрипта uppod'a
      * @var array
      */
@@ -65,7 +65,7 @@ class Yiippod extends CWidget
      **/
     private function publishAssets() 
     {
-        $assets = dirname(__FILE__).DIRECTORY_SEPARATOR."assets".DIRECTORY_SEPARATOR;
+        $assets = __DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR;
         $this->assets = Yii::app()->getAssetManager()->publish($assets);
     }
     /** 
@@ -74,7 +74,7 @@ class Yiippod extends CWidget
      */
     private function registerScripts()
     {
-        $url = $this->publishAssets();
+        $this->publishAssets();
 
         Yii::app()->clientScript
             ->registerScriptFile($this->assets.'/swfobject.js')
@@ -90,14 +90,10 @@ class Yiippod extends CWidget
         $this->publishAssets();
         $this->registerScripts();
 
-        if(!isset($this->width) or $this->width < 320 or empty($this->width)) $this->width = 320;
-		if(!isset($this->height) or $this->height < 240 or empty($this->height)) $this->height = 240;
-		if(!isset($this->bgcolor) or empty($this->bgcolor)) $this->bgcolor = '#FFF';
-		if(!isset($this->id) or empty($this->id)) $this->id = 'uppodplayer';
-        if(!isset($this->swfUrl)) $this->swfUrl = $this->assets."/uppod.swf";
+        if(!isset($this->swfUrl)) $this->swfUrl = $this->assets.'/uppod.swf';
 
-        $this->height=$this->height ? (int)$this->height : 480;
-        $this->width=$this->width ? (int)$this->width : 640;
+        $this->height=(int)$this->height;
+        $this->width=(int)$this->width;
     }
     /** 
      * Render uppod player -\- Отображение плеера
@@ -105,7 +101,6 @@ class Yiippod extends CWidget
      */
     public function run()
     {
-        $bgcolor=empty($this->bgcolor) ? '#000' : $this->bgcolor;
-        $this->render('yiippod', compact('bgcolor'));
+        $this->render('yiippod');
     }
 }
