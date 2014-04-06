@@ -10,7 +10,8 @@ $this->widget('ext.Yiippod.Yiippod', array(
 'id' => 'yiippodplayer',
 'width'=>640,
 'height'=>480,
-'bgcolor'=>'#000'
+'bgcolor'=>'#000',
+'autoplay'=>true,
 ));
 
 ?>
@@ -54,13 +55,29 @@ class Yiippod extends CWidget
     /** The styles file to register  -\- Путь до файла стилей uppod'a
      * @var array
      */
-    public $st;
+    public $style;
+
+    /** Play on start: true or false.
+     * @var bool
+     */
+    public $playlist;
+
+    /** The asset folder after published  -\- Папка со скриптами после публикации
+     * @var string
+     */
+    public $autoplay;
+
+    /** The js-file url of HTML5 settings  -\- Путь до файла JS кода для HTML5 версии плеера
+     * @var array
+     */
+    public $styleHtml5;
 
     /** The asset folder after published  -\- Папка со скриптами после публикации
      * @var string
      */
     private $assets;
-    /** 
+
+    /**
      * Publishing the assets  -\- Публикация скриптов
      **/
     private function publishAssets() 
@@ -90,7 +107,12 @@ class Yiippod extends CWidget
         $this->publishAssets();
         $this->registerScripts();
 
-        if(!isset($this->swfUrl)) $this->swfUrl = $this->assets.'/uppod.swf';
+        if(!$this->swfUrl===null) {
+            $this->swfUrl = $this->assets.'/uppod.swf';
+        }
+        if(!$this->playlist===null) {
+            $this->playlist=$this->assets.'/playlist.txt';
+        }
 
         $this->height=(int)$this->height;
         $this->width=(int)$this->width;
@@ -102,5 +124,12 @@ class Yiippod extends CWidget
     public function run()
     {
         $this->render('yiippod');
+    }
+
+    /**
+     * @return string ID for HTML5 player.
+     */
+    public function getHtml5Id() {
+        return $this->id.'html5';
     }
 }
