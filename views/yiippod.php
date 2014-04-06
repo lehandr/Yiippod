@@ -36,27 +36,26 @@
         } catch(e) {}
     }
 
-   if(ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1 || (ua.indexOf("android") != -1 && !flashInstalled)){
+    if(ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1 || (ua.indexOf("android") != -1 && !flashInstalled)){
         // HTML5
-       <?=file_get_contents($this->styleHtml5)?>
-       this.<?=$this->html5Id?> = new Uppod({m:"video",uid:"<?=$this->html5Id?>",file:"<?=$this->video?>",st:uppodvideo});
-       <?php if($this->autoplay): ?>
-       setTimeout('function(){' +
-           'this.<?=$this->html5Id?>.Play()}', 10);
-       <?php endif; ?>
-   } else {
+        <?=file_get_contents($this->styleHtml5)?>
+        this.<?=$this->html5Id?> = new Uppod({m:"video",uid:"<?=$this->html5Id?>",file:"<?=$this->video?>",st:uppodvideo});
+        <?php if($this->autoplay): ?>
+        setTimeout('function(){this.<?=$this->html5Id?>.Play()}', 10);
+        <?php endif; ?>
+    } else {
        if(!flashInstalled){
            // NO FLASH
            document.getElementById("<?=$this->id?>").innerHTML="<a href=http://www.adobe.com/go/getflashplayer>Требуется установить Flash-плеер</a>";
        } else {
-           try {
+            try {
                // FLASH
                var flashvars = {"file":"<?=$this->video?>"<?=($this->style ? ', "st": "'.$this->style.'"' : '')?>};
                var params = {bgcolor:"<?=$this->bgcolor?>",  allowFullScreen:"true", allowScriptAccess:"always",id:"<?=$this->id?>"};
                new swfobject.embedSWF("<?=Yii::app()->request->baseUrl.$this->swfUrl?>", "<?=$this->id?>", "<?=$this->width?>", "<?=$this->height?>", "10.0.0", false, flashvars, params);
-           } catch(e) {
+            } catch(e) {
                alert(e);
-           }
-       }
-   }
+            }
+        }
+    }
 </script>

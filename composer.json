@@ -1,0 +1,12 @@
+{
+    "name": "lehandr/Yiippod",
+    "description": "Flash and HTML5 video player without any logos or copyright on screen.",
+    "minimum-stability": "dev",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Alexey Naydenko",
+            "email": "lehandr@gmail.com"
+        }
+    ]
+}
