@@ -3,22 +3,16 @@
 ?>
 
 <object data="<?=$this->swfUrl?>" type="application/x-shockwave-flash" height="<?=$this->height?>" width="<?=$this->width?>">
-    <param value="<?=$this->bgcolor?>" name="bgcolor">
-    <param value="true" name="allowFullScreen">
-    <param value="always" name="allowScriptAccess">
-    <param value="<?=$this->id?>" name="id">
-    <?php if($this->autoplay): ?>
-        <param value="play" name="autoplay">
-    <?php endif; ?>
-    <?php if($this->playlist): ?>
-        <param value="playlist=<?=$this->playlist?>" name="pl">
-    <?php endif; ?>
-    <?php if($this->video): ?>
-        <param value="<?=$this->video?>" name="file">
-    <?php endif; ?>
-    <?php if($this->style): ?>
-        <param value="<?=$this->style?>" name="st">
-    <?php endif; ?>
+    <param name="bgcolor" value="<?=$this->bgcolor?>">
+    <param name="allowFullScreen" value="true">
+    <param name="allowScriptAccess" value="always">
+    <param name="id" value="<?=$this->id?>">
+    <param name="wmode" value="window">
+    <param name="movie" value="<?=$this->swfUrl?>">
+    <param name="flashvars" value="m=video&uid=<?=$this->id?>&file=<?=$this->video
+    .($this->style ? '&st='.$this->style : '')
+    .($this->poster ? '&poster ='.$this->poster : '')
+    .($this->playlist ? '&pl='.$this->playlist : '')?>">
 </object>
 
 <div style="height:<?=$this->height?>px; width:<?=$this->width?>px;" id="<?=$this->html5Id?>"></div>
