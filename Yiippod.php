@@ -17,6 +17,11 @@ $this->widget('ext.Yiippod.Yiippod', array(
 ?>
  */
 
+/**
+ * Class Yiippod
+ *
+ * @property string $html5Id
+ */
 class Yiippod extends CWidget
 {
     /** The uppod.swf url -\- Ссылка на .swf файл uppod'а
@@ -105,7 +110,8 @@ class Yiippod extends CWidget
 
         Yii::app()->clientScript
             ->registerScriptFile($this->assets.'/swfobject.js')
-            ->registerScriptFile($this->assets.'/uppod.js');
+            ->registerScriptFile($this->assets.'/uppod.js')
+            ->registerScriptFile($this->assets.'/flash_detect_min.js');
     }
     /**
      * Initialize the widget and necessary properties -\- Инициализация виджета и необходимых свойств
