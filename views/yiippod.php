@@ -2,18 +2,6 @@
 /** @var $this Yiippod */
 ?>
 
-<object data="<?=$this->swfUrl?>" type="application/x-shockwave-flash" height="<?=$this->height?>" width="<?=$this->width?>">
-    <param name="bgcolor" value="<?=$this->bgcolor?>">
-    <param name="allowFullScreen" value="true">
-    <param name="allowScriptAccess" value="always">
-    <param name="id" value="<?=$this->id?>">
-    <param name="wmode" value="window">
-    <param name="movie" value="<?=$this->swfUrl?>">
-    <param name="flashvars" value="m=video&uid=<?=$this->id?>&file=<?=$this->video
-    .($this->style ? '&st='.$this->style : '')
-    .($this->poster ? '&poster ='.$this->poster : '')
-    .($this->playlist ? '&pl='.$this->playlist : '')?>">
-</object>
 
 <div style="height:<?=$this->height?>px; width:<?=$this->width?>px;" id="<?=$this->html5Id?>"></div>
 

@@ -106,7 +106,6 @@ class Yiippod extends CWidget
         Yii::app()->clientScript
             ->registerScriptFile($this->assets.'/swfobject.js')
             ->registerScriptFile($this->assets.'/uppod.js');
-
     }
     /**
      * Initialize the widget and necessary properties -\- Инициализация виджета и необходимых свойств
