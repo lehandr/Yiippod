@@ -10,14 +10,13 @@
         <?=file_get_contents($this->styleHtml5)."\n"?>
         try {
             // Secondary invoke
+            this.<?=$this->html5Id?>.Init();
+        } catch(e) {
+            this.<?=$this->html5Id?> = new Uppod({m:"video",uid:"<?=$this->html5Id?>",file:"<?=$this->video?>",st:uppodvideo});
         }
-        this.<?=$this->html5Id?>.Init();
-    } catch(e) {
-        this.<?=$this->html5Id?> = new Uppod({m:"video",uid:"<?=$this->html5Id?>",file:"<?=$this->video?>",st:uppodvideo});
-    }
-    <?php if($this->autoplay): ?>
-    setTimeout('function(){ this.<?=$this->html5Id?>.Play(); }', 10);
-    <?php endif; ?>
+        <?php if($this->autoplay): ?>
+        setTimeout('function(){ this.<?=$this->html5Id?>.Play(); }', 10);
+        <?php endif; ?>
     } else if(!FlashDetect.installed){
         document.getElementById("<?=$this->html5Id?>").innerHTML="<a href=http://www.adobe.com/go/getflashplayer>Требуется установить Flash-плеер</a>";
     } else {
