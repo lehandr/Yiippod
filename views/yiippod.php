@@ -7,15 +7,21 @@
 <script>
     if (Modernizr.video) {
         // HTML5
-        <?=file_get_contents($this->styleHtml5)?>
+        <?=file_get_contents($this->styleHtml5)."\n"?>
+        try {
+            // Secondary invoke
+        }
+        this.<?=$this->html5Id?>.Init();
+    } catch(e) {
         this.<?=$this->html5Id?> = new Uppod({m:"video",uid:"<?=$this->html5Id?>",file:"<?=$this->video?>",st:uppodvideo});
-        <?php if($this->autoplay): ?>
-        setTimeout('function(){this.<?=$this->html5Id?>.Play()}', 10);
-        <?php endif; ?>
+    }
+    <?php if($this->autoplay): ?>
+    setTimeout('function(){ this.<?=$this->html5Id?>.Play(); }', 10);
+    <?php endif; ?>
     } else if(!FlashDetect.installed){
         document.getElementById("<?=$this->html5Id?>").innerHTML="<a href=http://www.adobe.com/go/getflashplayer>Требуется установить Flash-плеер</a>";
     } else {
-        document.writeln('<object data="<?=$this->swfUrl?>" type="application/x-shockwave-flash" height="<?=$this->height?>" width="<?=$this->width?>">'
+        document.getElementById("<?=$this->html5Id?>").innerHTML('<object data="<?=$this->swfUrl?>" type="application/x-shockwave-flash" height="<?=$this->height?>" width="<?=$this->width?>">'
             +'<param name="bgcolor" value="<?=$this->bgcolor?>">'
             +'<param name="allowFullScreen" value="true">'
             +'<param name="allowScriptAccess" value="always">'
